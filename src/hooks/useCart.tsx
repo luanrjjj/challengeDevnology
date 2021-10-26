@@ -39,9 +39,13 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     try {
       const updatedCart = [...cart];
 
-      const product = await api.get(
+      const product = await fetch(
         ` http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/${productId}`
-      );
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          return data;
+        });
       console.log("product", product);
 
       const newProduct = {

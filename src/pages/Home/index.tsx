@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MdAddShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart, MdProductionQuantityLimits } from "react-icons/md";
 import Header from "../../components/Header";
 import { useCart } from "../../hooks/useCart";
 import { ProductList } from "./styles";
@@ -12,6 +12,11 @@ interface Product {
   categoria: string;
   preco: number;
   imagem: string;
+  title: string;
+  price: number;
+  image: string;
+  name:string;
+  gallery:string[];
 }
 
 interface ProductEuropean {
@@ -41,7 +46,7 @@ const Home = (): JSX.Element => {
   const [products1, setProducts1] = useState([]);
   const [products2, setProducts2] = useState([]);
 
-  const { addProduct, removeProduct } = useCart();
+  const { addProduct } = useCart();
 
   const allProviders = [
     {
@@ -82,21 +87,7 @@ const Home = (): JSX.Element => {
 
   console.log("1", products1);
   console.log("2", products2);
-  /*
- allProviders.map(provider=>{
-    provider.provider=='brazilian_provider'? (provider.products.map((product)=>{
-      console.log('brazilian',product)
-    }))
-   :
-   (
-     provider.products.map((product)=>{
-      console.log('european',product)
-    })
-   )
-    
-  })
-  
-*/
+
   return (
     <>
       <Header />
@@ -121,8 +112,26 @@ const Home = (): JSX.Element => {
               </li>
             ));
           } else {
-            return provider.products.map((product: any) => (
-              <li key={product.id}>{product.name}</li>
+            return provider.products.map((product: Product) => (
+              <li key={product.id}>
+                <div className="GalleryPhotos">
+                  {product.gallery.map((imagem:any)=>{
+                     return  <img alt="" src={imagem} />
+                  })}
+                </div>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
+                <button
+                  type="button"
+                  data-testid="add-product-button"
+                  onClick={() => handleAddProduct(product.id)}
+                >
+                  <div data-testid="cart-product-quantity">
+                    <MdAddShoppingCart size={16} color="#FFF" />
+                  </div>
+                  <span>ADICIONAR AO CARRINHO</span>Comprar
+                </button>
+              </li>
             ));
           }
         })}

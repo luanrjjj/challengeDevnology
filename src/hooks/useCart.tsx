@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { api } from "../services/api";
+
 import { Product } from "../types";
 
 interface CartProviderProps {
@@ -35,10 +35,19 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   });
 
   const addProduct = async (productId: number) => {
-    console.log("passou aqui");
+
     try {
       const updatedCart = [...cart];
+      const productExist = updatedCart.find(product=>product.id===productId)
 
+
+
+      const currentAmount = productExist? productExist.amount:0;
+      const amount = currentAmount + 1;
+
+      if (productExist) {
+        productExist.amount = amount
+      } else {
       const product = await fetch(
         ` http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/${productId}`
       )
@@ -46,15 +55,14 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         .then((data) => {
           return data;
         });
-      console.log("product", product);
 
       const newProduct = {
-        ...product.data,
-        amount: 1,
+        ...product,
+        amount
       };
 
       updatedCart.push(newProduct);
-
+      }
       setCart(updatedCart);
       localStorage.setItem("@RocketShoes:cart", JSON.stringify(updatedCart));
     } catch {

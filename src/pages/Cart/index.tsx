@@ -11,26 +11,34 @@ import { Container, ProductTable, Total } from "./styles";
 
 interface Product {
   id: number;
+  nome: string;
+  descricao: string;
+  departamento: string;
+  categoria: string;
+  preco: number;
+  imagem: string;
   title: string;
   price: number;
   image: string;
-  amount: number;
 }
 
 const Cart = (): JSX.Element => {
-  const { cart, removeProduct } = useCart();
+  const { cart, removeProduct, addProduct } = useCart();
+  console.log('cart',cart)
 
   const cartFormatted = cart?.map((product) => ({
     ...product,
-    priceFormatted: formatPrice(product.price),
-    subTotal: formatPrice(product.price * product.amount),
+    priceFormatted: formatPrice(product.preco),
+    subTotal: formatPrice(product.preco * product.amount),
   }));
 
   const total = formatPrice(
     cart?.reduce((sumTotal, product) => {
-      return (sumTotal = sumTotal + product.price);
+      console.log(sumTotal)
+      return (sumTotal = sumTotal + Number(product.preco));
     }, 0)
   );
+  console.log(total)
 
   function handleRemoveProduct(productId: number) {
     removeProduct(productId);
@@ -38,7 +46,7 @@ const Cart = (): JSX.Element => {
 
   return (
     <Container>
-      2205
+      
       <ProductTable>
         <thead>
           <tr>

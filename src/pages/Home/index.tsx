@@ -24,6 +24,8 @@ interface ProductEuropean {
   title: string;
   price: number;
   image: string;
+  gallery:string[];
+  name:string;
 }
 
 interface ProductCart {
@@ -59,8 +61,9 @@ const Home = (): JSX.Element => {
     },
   ];
 
-  function handleAddProduct(id: number) {
-    addProduct(id);
+  function handleAddProduct(id: number,provider:string) {
+
+    addProduct(id,provider);
   }
 
   useEffect(() => {
@@ -87,7 +90,7 @@ const Home = (): JSX.Element => {
 
   console.log("1", products1);
   console.log("2", products2);
-
+ 
   return (
     <>
       <Header />
@@ -102,7 +105,7 @@ const Home = (): JSX.Element => {
                 <button
                   type="button"
                   data-testid="add-product-button"
-                  onClick={() => handleAddProduct(product.id)}
+                  onClick={() => handleAddProduct(product.id,provider.provider)}
                 >
                   <div data-testid="cart-product-quantity">
                     <MdAddShoppingCart size={16} color="#FFF" />
@@ -111,8 +114,8 @@ const Home = (): JSX.Element => {
                 </button>
               </li>
             ));
-          } else {
-            return provider.products.map((product: Product) => (
+          } else  {
+            return provider.products.map((product: ProductEuropean) => (
               <li key={product.id}>
                 <div className="GalleryPhotos">
                   {product.gallery.map((imagem:any)=>{
@@ -124,7 +127,7 @@ const Home = (): JSX.Element => {
                 <button
                   type="button"
                   data-testid="add-product-button"
-                  onClick={() => handleAddProduct(product.id)}
+                  onClick={() => handleAddProduct(product.id,provider.provider)}
                 >
                   <div data-testid="cart-product-quantity">
                     <MdAddShoppingCart size={16} color="#FFF" />

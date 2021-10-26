@@ -20,25 +20,44 @@ interface Product {
   title: string;
   price: number;
   image: string;
+  provider:string
+  discountValue:string;
 }
 
 const Cart = (): JSX.Element => {
   const { cart, removeProduct, addProduct } = useCart();
   console.log('cart',cart)
 
-  const cartFormatted = cart?.map((product) => ({
+
+  
+  const cartFormatted = cart?.map((product) => (
+  product.provider==='brazilian_provider'?
+  {
+    
     ...product,
     priceFormatted: formatPrice(product.preco),
-    subTotal: formatPrice(product.preco * product.amount),
-  }));
+    subTotal: (product.preco * product.amount),
+  }
+  :
+  {
+  ...product,
+    priceFormatted: formatPrice(product.price),
+    subTotal: (product.price * product.amount*(1 - Number(product.discountValue))),
+  }
+  
+  ));
 
   const total = formatPrice(
-    cart?.reduce((sumTotal, product) => {
+    cartFormatted?.reduce((sumTotal, product) => {
       console.log(sumTotal)
-      return (sumTotal = sumTotal + Number(product.preco));
+      console.log('sub',Number(product.subTotal))
+      let sumTotal1=0
+       sumTotal1 = sumTotal1 + Number(product?.subTotal);
+      console.log('sum',sumTotal1)
+      return (sumTotal = sumTotal + Number(product?.subTotal));
     }, 0)
   );
-  console.log(total)
+  
 
   function handleRemoveProduct(productId: number) {
     removeProduct(productId);
@@ -88,7 +107,7 @@ const Cart = (): JSX.Element => {
                 </div>
               </td>
               <td>
-                <strong>{product.subTotal}</strong>
+                <strong>{formatPrice(product.subTotal)}</strong>
               </td>
               <td>
                 <button

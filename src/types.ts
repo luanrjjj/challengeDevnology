@@ -10,6 +10,8 @@ export interface Product {
     price: number;
     image: string;
     amount:number;
+    provider:string;
+    discountValue:string;
   }
   
   export interface Stock {

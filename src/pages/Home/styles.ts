@@ -69,7 +69,7 @@ export const ProductList = styled.ul`
 
   .GalleryPhotos {
     display:flex;
-    max-width:250px;
+    max-width:400px;
     overflow:hidden;
   }
 `;

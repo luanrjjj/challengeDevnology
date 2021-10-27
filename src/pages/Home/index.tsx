@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MdAddShoppingCart, MdProductionQuantityLimits } from "react-icons/md";
+
 import Header from "../../components/Header";
 import { useCart } from "../../hooks/useCart";
 import { ProductList } from "./styles";
@@ -131,8 +132,13 @@ const Home = (): JSX.Element => {
             return provider.products.map((product: ProductEuropean) => (
               <li key={product.id}>
                 <div className="GalleryPhotos">
-                  {product.gallery.map((imagem:any)=>{
-                     return  <img alt="" src={imagem} />
+                  {product.gallery.map((imagem:string)=>{
+                     return (
+                       <div className="photo">
+                         <img alt="" src={imagem} />
+                       </div>
+                      
+                     )
                   })}
                 </div>
                 <strong>{product.name}</strong>

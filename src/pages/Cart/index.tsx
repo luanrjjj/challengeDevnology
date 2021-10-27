@@ -4,6 +4,9 @@ import {
   MdAddCircleOutline,
   MdRemoveCircleOutline,
 } from "react-icons/md";
+import {useHistory, Router,Link } from "react-router-dom";
+
+import Header from "../../components/Header";
 
 import { useCart } from "../../hooks/useCart";
 import { formatPrice } from "../../util/format";
@@ -26,7 +29,9 @@ interface Product {
 
 const Cart = (): JSX.Element => {
   const { cart, removeProduct, addProduct } = useCart();
+  let history = useHistory()
   console.log('cart',cart)
+  
 
 
   
@@ -63,7 +68,18 @@ const Cart = (): JSX.Element => {
     removeProduct(productId);
   }
 
+  function handleAddProduct(productId: number,provider:string) {
+    addProduct(productId,provider);
+  }
+
+  function handleCheckoutProcess() {
+    history.push('/Checkout')
+  }
+
+  
   return (
+    <>
+    <Header/>
     <Container>
       
       <ProductTable>
@@ -102,7 +118,9 @@ const Cart = (): JSX.Element => {
                     value={product.amount}
                   />
                   <button type="button" data-testid="increment-product">
-                    <MdAddCircleOutline size={20} />
+                    <MdAddCircleOutline size={20}
+                     onClick={() => handleAddProduct(product.id,product.provider)} />
+                   
                   </button>
                 </div>
               </td>
@@ -123,7 +141,7 @@ const Cart = (): JSX.Element => {
         </tbody>
       </ProductTable>
       <footer>
-        <button type="button">Finalizar pedido</button>
+        <button onClick={()=>{handleCheckoutProcess()}} type="button">Finalizar pedido</button>
 
         <Total>
           <span>TOTAL</span>
@@ -131,6 +149,7 @@ const Cart = (): JSX.Element => {
         </Total>
       </footer>
     </Container>
+    </>
   );
 };
 

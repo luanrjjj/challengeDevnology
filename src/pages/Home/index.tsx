@@ -28,6 +28,16 @@ interface ProductEuropean {
   name:string;
 }
 
+interface ProductBrazilian{
+  id: number;
+  nome: string;
+  descricao: string;
+  departamento: string;
+  categoria: string;
+  preco: number;
+  imagem: string;
+}
+
 interface ProductCart {
   id: number;
   title: string;
@@ -45,8 +55,8 @@ interface CartItemsAmount {
 }
 
 const Home = (): JSX.Element => {
-  const [products1, setProducts1] = useState([]);
-  const [products2, setProducts2] = useState([]);
+  const [products1, setProducts1] = useState<Product[]>([]);
+  const [products2, setProducts2] = useState<Product[]>([]);
 
   const { addProduct } = useCart();
 
@@ -60,6 +70,9 @@ const Home = (): JSX.Element => {
       products: products2,
     },
   ];
+
+
+
 
   function handleAddProduct(id: number,provider:string) {
 
@@ -97,7 +110,7 @@ const Home = (): JSX.Element => {
       <ProductList>
         {allProviders.map((provider) => {
           if (provider.provider === "brazilian_provider") {
-            return provider.products.map((product: Product) => (
+            return provider.products.map((product: ProductBrazilian) => (
               <li key={product.id}>
                 <img alt="" src={product.imagem} />
                 <strong>{product.nome}</strong>

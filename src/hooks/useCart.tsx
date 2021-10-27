@@ -17,7 +17,7 @@ interface ProductFormatted extends Product {
 */
 interface CartContextData {
   cart: Product[];
-  addProduct: (productId: number,provider:string) => Promise<void>;
+  addProduct: (productId: number, provider: string) => Promise<void>;
   removeProduct: (productId: number) => void;
 }
 
@@ -34,58 +34,49 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     return [];
   });
 
-  const addProduct = async (productId: number,provider:string) => {
-
+  const addProduct = async (productId: number, provider: string) => {
     try {
       const updatedCart = [...cart];
-      const productExist = updatedCart.find(product=>product.id===productId)
+      const productExist = updatedCart.find(
+        (product) => product.id === productId
+      );
 
-
-
-      const currentAmount = productExist? productExist.amount:0;
+      const currentAmount = productExist ? productExist.amount : 0;
       const amount = currentAmount + 1;
 
       if (productExist) {
-        productExist.amount = amount
+        productExist.amount = amount;
       } else {
-
-        if (provider==='brazilian_provider') {
-
-      const product = await fetch(
-        ` http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/${productId}`
-      ) 
-        .then((response) => response.json())
-        .then((data) => {
-          return data;
-        });
-
-        const newProduct = {
-          ...product,
-          amount,
-          provider:'brazilian_provider'
-        };
-        updatedCart.push(newProduct);
-      }
-        else {
+        if (provider === "brazilian_provider") {
           const product = await fetch(
-            ` http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider/${productId}`
-          ) 
+            ` http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/${productId}`
+          )
             .then((response) => response.json())
             .then((data) => {
               return data;
             });
-            const newProduct = {
-              ...product,
-              amount,
-              provider:'European_provider'
 
-              
-            };
-            updatedCart.push(newProduct);
-
+          const newProduct = {
+            ...product,
+            amount,
+            provider: "brazilian_provider",
+          };
+          updatedCart.push(newProduct);
+        } else {
+          const product = await fetch(
+            ` http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider/${productId}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              return data;
+            });
+          const newProduct = {
+            ...product,
+            amount,
+            provider: "European_provider",
+          };
+          updatedCart.push(newProduct);
         }
-      
-      
       }
       setCart(updatedCart);
       localStorage.setItem("@RocketShoes:cart", JSON.stringify(updatedCart));

@@ -19,6 +19,7 @@ interface CartContextData {
   cart: Product[];
   addProduct: (productId: number, provider: string) => Promise<void>;
   removeProduct: (productId: number) => void;
+  subtractProduct:(productId:number,provier:string) => Promise<void>
 }
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -85,7 +86,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
   };
 
-  const declineProduct = async (productId: number, provider: string) => {
+  const subtractProduct = async (productId: number, provider: string) => {
     try {
       const updatedCart = [...cart];
       const productExist = updatedCart.find(
@@ -93,13 +94,11 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       );
 
       const currentAmount = productExist ? productExist.amount : 0;
-      let amount
+      let amount = 0 
       if (currentAmount>1) {
             amount = currentAmount - 1;
-      } else {
-         amount=0
-      }
-
+      } 
+      console.log('aaaaa',currentAmount)
       if (productExist) {
         productExist.amount = amount;
       } else {
@@ -170,7 +169,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct }}>
+    <CartContext.Provider value={{ cart, addProduct, removeProduct,subtractProduct }}>
       {children}
     </CartContext.Provider>
   );

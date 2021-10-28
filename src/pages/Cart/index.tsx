@@ -14,7 +14,7 @@ import { Container, ProductTable, Total } from "./styles";
 
 
 const Cart = (): JSX.Element => {
-  const { cart, removeProduct, addProduct } = useCart();
+  const { cart, removeProduct, addProduct,subtractProduct } = useCart();
   let history = useHistory()
   console.log('cart',cart)
   
@@ -58,6 +58,10 @@ const Cart = (): JSX.Element => {
     addProduct(productId,provider);
   }
 
+  function handleSubtractProduct(productId: number,provider:string) {
+    subtractProduct(productId,provider);
+  }
+
   function handleCheckoutProcess() {
     history.push('/Checkout')
   }
@@ -93,10 +97,10 @@ const Cart = (): JSX.Element => {
                   <button
                     type="button"
                     data-testid="decrement-product"
-                    disabled={product.amount <= 1}
+                    disabled={product.amount <= 0}
                   >
                     <MdRemoveCircleOutline size={20}
-                    onClick={() => handleAddProduct(product.id,product.provider)} />
+                    onClick={() => handleSubtractProduct(product.id,product.provider)} />
                   </button>
                   <input
                     type="text"

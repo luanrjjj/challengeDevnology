@@ -49,6 +49,7 @@ const Cart = (): JSX.Element => {
     }, 0)
   );
   
+  console.log(cartFormatted)
 
   function handleRemoveProduct(productId: number) {
     removeProduct(productId);
@@ -83,13 +84,17 @@ const Cart = (): JSX.Element => {
           </tr>
         </thead>
         <tbody>
+        
           {cartFormatted?.map((product) => (
-            <tr key={product.id} data-testid="product">
+            product.provider==='brazilian_provider'?(
+            
+              <tr key={product.id} data-testid="product">
+
               <td>
-                <img src={product.image} alt={product.title} />
+                <img src={product.imagem} alt={product.title} />
               </td>
               <td>
-                <strong>{product.title}</strong>
+                <strong>{product.nome}</strong>
                 <span>{product.priceFormatted}</span>
               </td>
               <td>
@@ -128,6 +133,54 @@ const Cart = (): JSX.Element => {
                 </button>
               </td>
             </tr>
+            ):(
+              <tr key={product.id} data-testid="product">
+
+              <td>
+                <img src={product.gallery[0]} alt={product.title} />
+              </td>
+              <td>
+                <strong>{product.name}</strong>
+                <span>{product.priceFormatted}</span>
+              </td>
+              <td>
+                <div>
+                  <button
+                    type="button"
+                    data-testid="decrement-product"
+                    disabled={product.amount <= 0}
+                  >
+                    <MdRemoveCircleOutline size={20}
+                    onClick={() => handleSubtractProduct(product.id,product.provider)} />
+                  </button>
+                  <input
+                    type="text"
+                    data-testid="product-amount"
+                    readOnly
+                    value={product.amount}
+                  />
+                  <button type="button" data-testid="increment-product">
+                    <MdAddCircleOutline size={20}
+                     onClick={() => handleAddProduct(product.id,product.provider)} />
+                   
+                  </button>
+                </div>
+              </td>
+              <td>
+                <strong>{formatPrice(product.subTotal)}</strong>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  data-testid="remove-product"
+                  onClick={() => handleRemoveProduct(product.id)}
+                >
+                  <MdDelete size={20} />
+                </button>
+              </td>
+            </tr>
+            )
+            
           ))}
         </tbody>
       </ProductTable>

@@ -95,7 +95,8 @@ const Cart = (): JSX.Element => {
                     data-testid="decrement-product"
                     disabled={product.amount <= 1}
                   >
-                    <MdRemoveCircleOutline size={20} />
+                    <MdRemoveCircleOutline size={20}
+                    onClick={() => handleAddProduct(product.id,product.provider)} />
                   </button>
                   <input
                     type="text"

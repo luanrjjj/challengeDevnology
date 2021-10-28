@@ -1,21 +1,26 @@
-export interface Product {
-    id: number;
-    nome: string;
-    descricao: string;
-    departamento: string;
-    categoria: string;
-    preco: number;
-    imagem: string;
-    title: string;
-    price: number;
-    image: string;
-    amount:number;
-    provider:string;
-    discountValue:string;
-  }
-  
-  export interface Stock {
-    id: number;
-    amount: number;
-  }
+export interface Product extends ProductEuropean, ProductBrazilian {
+  amount:number;
+  provider:string;
+  discountValue:number;
+}
+
+export interface ProductEuropean {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  gallery: string[];
+  name: string;
+}
+
+export interface ProductBrazilian {
+  id: number;
+  nome: string;
+  descricao: string;
+  departamento: string;
+  categoria: string;
+  preco: number;
+  imagem: string;
+}
+
   

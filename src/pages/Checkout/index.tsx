@@ -23,7 +23,7 @@ interface Product {
   image: string;
   provider: string;
   discountValue: string;
-  amount:number;
+  amount: number;
 }
 
 const schema = yup.object().shape({
@@ -36,51 +36,45 @@ const CheckoutComponent = (): JSX.Element => {
     resolver: yupResolver(schema),
   });
   const [cart, setCart] = useState<Product[]>(() => {
-  const storagedCart = localStorage.getItem("@RocketShoes:cart");
- 
+    const storagedCart = localStorage.getItem("@RocketShoes:cart");
 
-  if (storagedCart) {
-    return JSON.parse(storagedCart);
-  }
+    if (storagedCart) {
+      return JSON.parse(storagedCart);
+    }
 
-  return [];
-});
+    return [];
+  });
 
-const cartFormatted = cart?.map((product) => (
-  product.provider==='brazilian_provider'?
-  {
-    
-    ...product,
-    priceFormatted: formatPrice(product.preco),
-    subTotal: (product.preco * product.amount),
-  }
-  :
-  {
-  ...product,
-    priceFormatted: formatPrice(product.price),
-    subTotal: (product.price * product.amount*(1 - Number(product.discountValue))),
-  }
-  
-  ));
+  const cartFormatted = cart?.map((product) =>
+    product.provider === "brazilian_provider"
+      ? {
+          ...product,
+          priceFormatted: formatPrice(product.preco),
+          subTotal: product.preco * product.amount,
+        }
+      : {
+          ...product,
+          priceFormatted: formatPrice(product.price),
+          subTotal:
+            product.price *
+            product.amount *
+            (1 - Number(product.discountValue)),
+        }
+  );
 
   const total = formatPrice(
     cartFormatted?.reduce((sumTotal, product) => {
-      console.log(sumTotal)
-      console.log('sub',Number(product.subTotal))
-      let sumTotal1=0
-       sumTotal1 = sumTotal1 + Number(product?.subTotal);
-      console.log('sum',sumTotal1)
+      console.log(sumTotal);
+      console.log("sub", Number(product.subTotal));
+      let sumTotal1 = 0;
+      sumTotal1 = sumTotal1 + Number(product?.subTotal);
+      console.log("sum", sumTotal1);
       return (sumTotal = sumTotal + Number(product?.subTotal));
     }, 0)
   );
-  
 
-  const {
-    getExpiryDateProps,
-    getCVCProps,
-    wrapperProps,
-    getCardImageProps,
-  } = usePaymentInputs();
+  const { getExpiryDateProps, getCVCProps, wrapperProps, getCardImageProps } =
+    usePaymentInputs();
 
   const registerHandler = (data: any) => {
     console.log(data);
@@ -94,7 +88,6 @@ const cartFormatted = cart?.map((product) => (
         <form onSubmit={handleSubmit(registerHandler)}>
           <div className="form-group">
             <h1>Valor Total: {total}</h1>
-            
 
             <input
               {...register("name")}
@@ -102,7 +95,7 @@ const cartFormatted = cart?.map((product) => (
               type="name"
               required
             />
-               <br />
+            <br />
             <input
               {...register("email")}
               placeholder="Digite seu Email"
@@ -110,14 +103,13 @@ const cartFormatted = cart?.map((product) => (
               required
             />
             <br />
-             <input
+            <input
               {...register("cpf")}
               placeholder="Digite seu CPF"
               type="CPF"
               required
             />
 
-          
             <br />
 
             <PaymentInputsWrapper
@@ -175,7 +167,7 @@ const cartFormatted = cart?.map((product) => (
                   required
                   className="CardNumber"
                 />
-                <input {...getExpiryDateProps()}  />
+                <input {...getExpiryDateProps()} />
                 <input {...getCVCProps()} />
               </div>
             </PaymentInputsWrapper>

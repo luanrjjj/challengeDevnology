@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { darken } from 'polished';
+import styled from "styled-components";
+import { darken } from "polished";
 
 export const ProductList = styled.ul`
   display: grid;
@@ -45,7 +45,7 @@ export const ProductList = styled.ul`
       transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.06, '#7159c1')};
+        background: ${darken(0.06, "#7159c1")};
       }
 
       div {
@@ -68,20 +68,62 @@ export const ProductList = styled.ul`
   }
 
   .GalleryPhotos {
-    display:flex;
-    flex-direction:row;
-    width:270px;
-    overflow:hidden;
+    display: flex;
+    flex-direction: row;
+    width: 270px;
+    overflow: hidden;
   }
-
 
   .photo {
     padding: 0 2px;
     transition: 250ms all;
 
     &:hover {
-       margin: 0 40px;
+      margin: 0 40px;
       transform: scale(1.2);
     }
   }
 `;
+
+export const SectionFilter = styled.div `
+ 
+    max-width:1050px;
+    margin-bottom:30px;
+   
+
+  .form {
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    display:flex;
+    
+  }
+  .form-group {
+    justify-content:center;
+    
+
+    input {
+      width:600px;
+      padding:10px;
+      margin-top:10px;
+    }
+
+  }
+
+  button {
+    background: #7159c1;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 6px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.06, "#7159c1")};
+    }
+    margin-top:10px;
+  }
+
+`

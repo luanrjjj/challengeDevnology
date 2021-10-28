@@ -12,20 +12,6 @@ import { useCart } from "../../hooks/useCart";
 import { formatPrice } from "../../util/format";
 import { Container, ProductTable, Total } from "./styles";
 
-interface Product {
-  id: number;
-  nome: string;
-  descricao: string;
-  departamento: string;
-  categoria: string;
-  preco: number;
-  imagem: string;
-  title: string;
-  price: number;
-  image: string;
-  provider:string
-  discountValue:string;
-}
 
 const Cart = (): JSX.Element => {
   const { cart, removeProduct, addProduct } = useCart();

@@ -1,63 +1,21 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { MdAddShoppingCart, MdProductionQuantityLimits } from "react-icons/md";
 
 import Header from "../../components/Header";
 import { useCart } from "../../hooks/useCart";
-import { ProductList } from "./styles";
+import { ProductList, SectionFilter } from "./styles";
+import {Product,ProductBrazilian,ProductEuropean} from '../../types'
 
-interface Product {
-  id: number;
-  nome: string;
-  descricao: string;
-  departamento: string;
-  categoria: string;
-  preco: number;
-  imagem: string;
-  title: string;
-  price: number;
-  image: string;
-  name:string;
-  gallery:string[];
-}
 
-interface ProductEuropean {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  gallery:string[];
-  name:string;
-}
 
-interface ProductBrazilian{
-  id: number;
-  nome: string;
-  descricao: string;
-  departamento: string;
-  categoria: string;
-  preco: number;
-  imagem: string;
-}
-
-interface ProductCart {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  amount: number;
-}
-
-interface ProductFormatted extends Product {
-  priceFormatted: string;
-}
-
-interface CartItemsAmount {
-  [key: number]: number;
-}
 
 const Home = (): JSX.Element => {
   const [products1, setProducts1] = useState<Product[]>([]);
   const [products2, setProducts2] = useState<Product[]>([]);
+
+  const { register, reset, setError, handleSubmit } = useForm({});
 
   const { addProduct } = useCart();
 
@@ -72,12 +30,8 @@ const Home = (): JSX.Element => {
     },
   ];
 
-
-
-
-  function handleAddProduct(id: number,provider:string) {
-
-    addProduct(id,provider);
+  function handleAddProduct(id: number, provider: string) {
+    addProduct(id, provider);
   }
 
   useEffect(() => {
@@ -101,13 +55,29 @@ const Home = (): JSX.Element => {
     }
     loadProducts2();
   }, []);
-
-  console.log("1", products1);
-  console.log("2", products2);
+  
  
   return (
     <>
       <Header />
+      <SectionFilter>
+      <form className="form">
+          <div className="form-group">
+            <input
+              {...register("name")}
+              placeholder="Busque pelo nome do item"
+              type="name"
+              required
+            />
+            <br />
+            <button type="submit">Buscar</button>
+            <br />
+           
+           
+             </div>
+            </form>
+            </SectionFilter>
+           
       <ProductList>
         {allProviders.map((provider) => {
           if (provider.provider === "brazilian_provider") {
@@ -119,7 +89,9 @@ const Home = (): JSX.Element => {
                 <button
                   type="button"
                   data-testid="add-product-button"
-                  onClick={() => handleAddProduct(product.id,provider.provider)}
+                  onClick={() =>
+                    handleAddProduct(product.id, provider.provider)
+                  }
                 >
                   <div data-testid="cart-product-quantity">
                     <MdAddShoppingCart size={16} color="#FFF" />
@@ -128,17 +100,16 @@ const Home = (): JSX.Element => {
                 </button>
               </li>
             ));
-          } else  {
+          } else {
             return provider.products.map((product: ProductEuropean) => (
               <li key={product.id}>
                 <div className="GalleryPhotos">
-                  {product.gallery.map((imagem:string)=>{
-                     return (
-                       <div className="photo">
-                         <img alt="" src={imagem} />
-                       </div>
-                      
-                     )
+                  {product.gallery.map((imagem: string) => {
+                    return (
+                      <div className="photo">
+                        <img alt="" src={imagem} />
+                      </div>
+                    );
                   })}
                 </div>
                 <strong>{product.name}</strong>
@@ -146,7 +117,9 @@ const Home = (): JSX.Element => {
                 <button
                   type="button"
                   data-testid="add-product-button"
-                  onClick={() => handleAddProduct(product.id,provider.provider)}
+                  onClick={() =>
+                    handleAddProduct(product.id, provider.provider)
+                  }
                 >
                   <div data-testid="cart-product-quantity">
                     <MdAddShoppingCart size={16} color="#FFF" />

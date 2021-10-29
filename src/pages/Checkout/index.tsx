@@ -11,22 +11,8 @@ import images from "react-payment-inputs/images";
 import { formatPrice } from "../../util/format";
 import { api } from "../../services/api";
 import { MdNorthWest } from "react-icons/md";
+import { Product, ProductBrazilian, ProductEuropean } from "../../types";
 
-interface Product {
-  id: number;
-  nome: string;
-  descricao: string;
-  departamento: string;
-  categoria: string;
-  preco: number;
-  imagem: string;
-  title: string;
-  price: number;
-  image: string;
-  provider: string;
-  discountValue: string;
-  amount: number;
-}
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -34,7 +20,7 @@ const schema = yup.object().shape({
 });
 
 const CheckoutComponent = (): JSX.Element => {
-  const { register, reset, setError, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
   const [cart, setCart] = useState<Product[]>(() => {

@@ -6,15 +6,6 @@ import { Product } from "../types";
 interface CartProviderProps {
   children: ReactNode;
 }
-/*
-interface UpdateProductAmount {
-  productId: number;
-}
-
-interface ProductFormatted extends Product {
-  priceFormatted: string;
-}
-*/
 interface CartContextData {
   cart: Product[];
   addProduct: (productId: number, provider: string) => Promise<void>;

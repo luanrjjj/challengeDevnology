@@ -6,9 +6,6 @@ import Header from "../../components/Header";
 import { useCart } from "../../hooks/useCart";
 import { ProductList, SectionFilter } from "./styles";
 import { Product, ProductBrazilian, ProductEuropean } from "../../types";
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
-
-import InfiniteScroll from "react-infinite-scroll-component";
 
 interface ItemInformations {
   products: Product[];

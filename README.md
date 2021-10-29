@@ -11,8 +11,10 @@ Os produtos são salvos e persistidos no carrinho de compras com a utilização 
  até o Checkout foi feito com useContext no useHook denominado como useCart.
  
  O Checkout sendo finalizado, os dados são salvos no MongoDB em um único schema.
+ 
+ 
 
-A abrir o arquivo do projeto para instalação das dependências contidas no package.json execute yarn no terminal.
+Ao abrir o arquivo do projeto para instalação das dependências contidas no package.json execute yarn no terminal.
 
 Depois da instalação das dependências, também na pasta do diretório execute yarn start para iniciliazar o projeto.
 

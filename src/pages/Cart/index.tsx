@@ -4,7 +4,7 @@ import {
   MdAddCircleOutline,
   MdRemoveCircleOutline,
 } from "react-icons/md";
-import {useHistory, Router,Link } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 
 import Header from "../../components/Header";
 

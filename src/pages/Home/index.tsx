@@ -118,7 +118,7 @@ const Home = (): JSX.Element => {
                   <li key={product.id}>
                     <img alt="" src={product.imagem} />
                     <strong>{product.nome}</strong>
-                    <span>{product.preco}</span>
+                    <span> R$ {product.preco}</span>
                     <button
                       type="button"
                       data-testid="add-product-button"
@@ -146,7 +146,7 @@ const Home = (): JSX.Element => {
                       })}
                     </div>
                     <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                    <span>R$ {product.price}</span>
                     <button
                       type="button"
                       data-testid="add-product-button"
@@ -168,8 +168,9 @@ const Home = (): JSX.Element => {
                 return provider.products.map((product: ProductBrazilian) => (
                   <li key={product.id}>
                     <img alt="" src={product.imagem} />
+
                     <strong>{product.nome}</strong>
-                    <span>{product.preco}</span>
+                    <span>R$ {product.preco}</span>
                     <button
                       type="button"
                       data-testid="add-product-button"
@@ -189,15 +190,17 @@ const Home = (): JSX.Element => {
                   <li key={product.id}>
                     <div className="GalleryPhotos">
                       {product.gallery.map((imagem: string) => {
+                        
                         return (
                           <div className="photo">
-                            <img alt="" src={imagem} />
-                          </div>
-                        );
+                        <img alt={imagem} src={imagem} />;
+                        </div>
+                        )
                       })}
                     </div>
+
                     <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                    <span>$ {product.price}</span>
                     <button
                       type="button"
                       data-testid="add-product-button"

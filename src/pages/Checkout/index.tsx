@@ -9,6 +9,8 @@ import { Container } from "./styles";
 import { usePaymentInputs, PaymentInputsWrapper } from "react-payment-inputs";
 import images from "react-payment-inputs/images";
 import { formatPrice } from "../../util/format";
+import { api } from "../../services/api";
+import { MdNorthWest } from "react-icons/md";
 
 interface Product {
   id: number;
@@ -64,11 +66,10 @@ const CheckoutComponent = (): JSX.Element => {
 
   const total = formatPrice(
     cartFormatted?.reduce((sumTotal, product) => {
-      console.log(sumTotal);
-      console.log("sub", Number(product.subTotal));
+      
       let sumTotal1 = 0;
       sumTotal1 = sumTotal1 + Number(product?.subTotal);
-      console.log("sum", sumTotal1);
+     
       return (sumTotal = sumTotal + Number(product?.subTotal));
     }, 0)
   );
@@ -76,9 +77,23 @@ const CheckoutComponent = (): JSX.Element => {
   const { getExpiryDateProps, getCVCProps, wrapperProps, getCardImageProps } =
     usePaymentInputs();
 
-  const registerHandler = (data: any) => {
+  const registerHandler = async (data: any) => {
     console.log(data);
-    reset();
+    console.log('cart',cart)
+
+     const response = await api.post('/statement', {
+       user_name:data.name,
+       user_cpf:data.cpf,
+       user_email:data.email,
+       cart:cart,
+       created_at:Date.now()
+
+
+    })
+    //reset();
+    return response
+    
+    
   };
 
   return (

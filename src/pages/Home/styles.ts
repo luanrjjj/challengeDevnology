@@ -73,16 +73,16 @@ export const ProductList = styled.ul`
     flex-direction: row;
     width: 270px;
     overflow: hidden;
+    transition:2s;
+    &:hover {
+      transform:translateX(-100px)
+    }
   }
 
   .photo {
     padding: 0 2px;
     transition: 250ms all;
-
-    &:hover {
-      margin: 0 40px;
-      transform: scale(1.2);
-    }
+    width:200px;
   }
 `;
 

@@ -24,7 +24,7 @@ const Home = (): JSX.Element => {
 
   const { addProduct } = useCart();
 
-  const allProviders = [
+  const allProducts = [
     {
       provider: "brazilian_provider",
       products: products1,
@@ -42,7 +42,7 @@ const Home = (): JSX.Element => {
   const handleFilterNameProduct = (data) => {
     const name = data.name;
     let itemsFoundTotal: ItemInformations[] = [];
-    allProviders.map((products) => {
+    allProducts.map((products) => {
       if (products.provider === "brazilian_provider") {
         const itemsFound = products1.filter((product) => product.nome === name);
 
@@ -166,7 +166,7 @@ const Home = (): JSX.Element => {
                 ));
               }
             })
-          : allProviders.map((provider) => {
+          : allProducts.map((provider) => {
               if (provider.provider === "brazilian_provider") {
                 return provider.products.map((product: ProductBrazilian) => (
                   <li key={product.id}>

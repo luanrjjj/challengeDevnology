@@ -6,13 +6,14 @@ import logo from "../../assets/images/logo.svg";
 import { Container, Cart } from "./styles";
 import { useCart } from "../../hooks/useCart";
 
+
 const Header = (): JSX.Element => {
   const { cart } = useCart();
   const cartSize = cart.length;
   return (
     <Container>
       <Link to="/">
-        <img src={logo} alt="Rocketshoes" />
+        <span className="Title">Shop</span>
       </Link>
 
       <Cart to="/cart">

@@ -7,8 +7,17 @@ export const Container = styled.header`
   align-items: center;
   margin: 50px 0;
 
+
+  .Title {
+    color:#FFF;
+    text-decoration: none;
+    font-size:24px;
+    font-weight:800;
+  }
+
   a {
     transition: opacity 0.2s;
+    text-decoration:none;
 
     &:hover {
       opacity: 0.7;

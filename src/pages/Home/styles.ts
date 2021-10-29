@@ -74,16 +74,14 @@ export const ProductList = styled.ul`
     width: 270px;
     overflow: hidden;
     transition:2s;
-    &:hover {
-      transform:translateX(-100px)
-    }
-  }
+  
 
   .photo {
     padding: 0 2px;
     transition: 250ms all;
-    width:200px;
+    width:300px;
   }
+}
 `;
 
 export const SectionFilter = styled.div `

@@ -6,6 +6,9 @@ import Header from "../../components/Header";
 import { useCart } from "../../hooks/useCart";
 import { ProductList, SectionFilter } from "./styles";
 import { Product, ProductBrazilian, ProductEuropean } from "../../types";
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
+
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface ItemInformations {
   products: Product[];
@@ -17,6 +20,8 @@ const Home = (): JSX.Element => {
   const [products2, setProducts2] = useState<Product[]>([]);
   const [filter, setFilter] = useState("");
   const [sortProduct, setSortProduct] = useState<ItemInformations[]>([]);
+
+  const [current, setCurrent] = useState(0);
 
   const { register, handleSubmit } = useForm({});
 
@@ -110,6 +115,7 @@ const Home = (): JSX.Element => {
           </div>
         </form>
       </SectionFilter>
+
       <ProductList>
         {sortProduct?.length > 0
           ? sortProduct.map((provider) => {
@@ -189,14 +195,12 @@ const Home = (): JSX.Element => {
                 return provider.products.map((product: ProductEuropean) => (
                   <li key={product.id}>
                     <div className="GalleryPhotos">
-                      {product.gallery.map((imagem: string) => {
-                        
-                        return (
-                          <div className="photo">
-                        <img alt={imagem} src={imagem} />;
-                        </div>
-                        )
-                      })}
+                      <div className="photo">
+                        <img
+                          alt={product.gallery[0]}
+                          src={product.gallery[0]}
+                        />
+                      </div>
                     </div>
 
                     <strong>{product.name}</strong>

@@ -2,7 +2,7 @@
 
 O consumo das API forneceidas foi feito por fetch dentro dos useEffects e armazenados em uma variável para cada fornecedor, posteriormente as duas variáveis foram juntas em 1 unica variável diferenciando os produtos para cada fornecedor.
 
-![image](https://user-images.githubusercontent.com/71605566/139510056-d450dc11-467c-49bb-88fe-ce04e0e1a36d.png)
+![image](https://user-images.githubusercontent.com/71605566/139563201-0ea764f6-b066-45c5-9926-c30187c3dd0c.png)
 
 
 Para os objetivos do desafio foi suficiente essa forma, porém caso existisse mais fornecedores seria necessário uma estrutração mais abstrata ou uma padronização dos dados oriundos da API.

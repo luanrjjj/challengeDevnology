@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { css } from "styled-components";
@@ -10,8 +11,8 @@ import { usePaymentInputs, PaymentInputsWrapper } from "react-payment-inputs";
 import images from "react-payment-inputs/images";
 import { formatPrice } from "../../util/format";
 import { api } from "../../services/api";
-import { MdNorthWest } from "react-icons/md";
-import { Product, ProductBrazilian, ProductEuropean } from "../../types";
+
+import { Product } from "../../types";
 
 
 const schema = yup.object().shape({

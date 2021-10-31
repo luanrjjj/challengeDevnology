@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { MdAddShoppingCart } from "react-icons/md";
@@ -6,6 +7,7 @@ import Header from "../../components/Header";
 import { useCart } from "../../hooks/useCart";
 import { ProductList, SectionFilter } from "./styles";
 import { Product, ProductBrazilian, ProductEuropean } from "../../types";
+import { toast } from "react-toastify";
 
 interface ItemInformations {
   products: Product[];
@@ -17,8 +19,6 @@ const Home = (): JSX.Element => {
   const [products2, setProducts2] = useState<Product[]>([]);
   const [filter, setFilter] = useState("");
   const [sortProduct, setSortProduct] = useState<ItemInformations[]>([]);
-
-  const [current, setCurrent] = useState(0);
 
   const { register, handleSubmit } = useForm({});
 
@@ -46,7 +46,7 @@ const Home = (): JSX.Element => {
       if (products.provider === "brazilian_provider") {
         const itemsFound = products1.filter((product) => product.nome === name);
 
-        if (itemsFound) {
+        if (itemsFound.length>0) {
           itemsFoundTotal.push({
             provider: products.provider,
             products: itemsFound,
@@ -58,14 +58,17 @@ const Home = (): JSX.Element => {
           (product) => product.name === name
         );
 
-        if (itemsFound1) {
+        if (itemsFound1.length>0) {
           itemsFoundTotal.push({
             provider: products.provider,
             products: itemsFound1,
           });
         }
-
+        if (itemsFoundTotal.length>0) {
         setSortProduct(itemsFoundTotal);
+        } else {
+          toast.error('Produto não encontrado')
+        }
       }
     });
   };
@@ -92,6 +95,7 @@ const Home = (): JSX.Element => {
     loadAllProducts();
   }, []);
 
+  console.log(sortProduct)
   return (
     <>
       <Header />

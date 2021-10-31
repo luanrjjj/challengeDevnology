@@ -16,7 +16,7 @@ Os produtos são salvos e persistidos no carrinho de compras com a utilização 
  
 Além disso, a parte da responsividade não foi feita, já que não foi uma exigência do desafio.
 
-A api foi feita em NodeJS, com o framework express e o banco de dado MONGODB. A api apresenta uma estrutura de camadas, que fica evidenciado na parte das pastas, na qual seria facilmente escalada. Único acréscimo feito em termos de estruturação de pastas, seria a separação da pasta useCases em seus componentes : Controllers, Services e DTOS.
+A api foi feita em NodeJS, com o framework Express e o banco de dado MongoDB. A api apresenta uma estrutura de camadas, o que fica evidenciado na estrutura das pastas, na qual seria facilmente escalada. Único acréscimo feito em termos de estruturação de pastas, seria a separação da pasta useCases em seus componentes : Controllers, Services e DTOS.
 
 O link do repositório do backend : https://github.com/luanrjjj/challengeDevnologyBackend
 

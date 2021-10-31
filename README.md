@@ -21,7 +21,8 @@ A api foi feita em NodeJS, com o framework Express e o banco de dado MongoDB. A 
 O link do repositório do backend : https://github.com/luanrjjj/challengeDevnologyBackend
 
  
- Orientações para instalação do Frontend: 
+Orientações para instalação do Frontend: 
+ 
 Ao abrir o arquivo do projeto para instalação das dependências contidas no package.json execute yarn no terminal.
 
 

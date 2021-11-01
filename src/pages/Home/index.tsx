@@ -95,7 +95,7 @@ const Home = (): JSX.Element => {
     loadAllProducts();
   }, []);
 
-  console.log(sortProduct)
+ 
   return (
     <>
       <Header />

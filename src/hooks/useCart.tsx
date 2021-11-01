@@ -89,7 +89,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       if (currentAmount>1) {
             amount = currentAmount - 1;
       } 
-      console.log('aaaaa',currentAmount)
+      
       if (productExist) {
         productExist.amount = amount;
       } else {
@@ -141,7 +141,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       if (productExist) {
         var i;
         for (i = 0; i < updatedCart.length; i++) {
-          console.log(i);
+          
           if (updatedCart[i].id === productId) {
             updatedCart.splice(i, 1);
             setCart(updatedCart);

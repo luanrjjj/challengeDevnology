@@ -16,7 +16,7 @@ import { Container, ProductTable, Total } from "./styles";
 const Cart = (): JSX.Element => {
   const { cart, removeProduct, addProduct,subtractProduct } = useCart();
   let history = useHistory()
-  console.log('cart',cart)
+  
   
 
 
@@ -40,16 +40,16 @@ const Cart = (): JSX.Element => {
 
   const total = formatPrice(
     cartFormatted?.reduce((sumTotal, product) => {
-      console.log(sumTotal)
-      console.log('sub',Number(product.subTotal))
+     
+    
       let sumTotal1=0
        sumTotal1 = sumTotal1 + Number(product?.subTotal);
-      console.log('sum',sumTotal1)
+    
       return (sumTotal = sumTotal + Number(product?.subTotal));
     }, 0)
   );
   
-  console.log(cartFormatted)
+
 
   function handleRemoveProduct(productId: number) {
     removeProduct(productId);

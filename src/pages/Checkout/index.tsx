@@ -65,8 +65,7 @@ const CheckoutComponent = (): JSX.Element => {
     usePaymentInputs();
 
   const registerHandler = async (data: any) => {
-    console.log(data);
-    console.log('cart',cart)
+    
 
      const response = await api.post('/statement', {
        user_name:data.name,
